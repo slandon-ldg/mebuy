@@ -13,7 +13,14 @@
 <header>
     <a href="/">Logo</a>
     <i class="fas fa-shopping-cart"></i>
-    <i class="fas fa-search"></i>
+
+    <div class="search-container">
+        <form action="/">
+            <input type="text" placeholder="Search..." name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+
 </header>
 
 <?php

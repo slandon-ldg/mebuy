@@ -12,9 +12,37 @@ header a {
 header i {
     float        : right;
     margin-right : 25px;
-    margin-top : 8px;
-    font-size: 20px;
+    margin-top   : 8px;
+    font-size    : 20px;
 }
 header a:hover, header i:hover {
     color : #000000;
+}
+.search-container {
+    float      : right;
+    margin-top : -4px;
+}
+input[type=text] {
+    margin-right  : 4px;
+    padding       : 6px;
+    font-size     : 16px;
+    text-align    : right;
+    border        : 2px solid #ccc;
+    border-radius : 4px;
+}
+.search-container button {
+    float      : right;
+    background : #FFFFFF;
+    border     : none;
+    cursor     : pointer;
+    font-size  : 20px;
+    margin-top : 5px;
+}
+.search-container button:hover {
+    color : #000000;
+}
+@media screen and (max-width : 420px) {
+    input[type=text] {
+        width : 90px;
+    }
 }
