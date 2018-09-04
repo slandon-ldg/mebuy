@@ -1,0 +1,93 @@
+/* Header tag for page */
+h1 {
+    margin-top : 5px;
+    text-align : center;
+}
+/* General Styling for form */
+.registration_form {
+    text-align : center;
+    margin-top : 10px;
+}
+/* Text Input Styling, with transition */
+.reg_form_textfield {
+    width         : 40%;
+    padding       : 10px;
+    margin        : 8px 0;
+    display       : inline-block;
+    border        : 2px solid #9d9d9d;
+    border-radius : 4px;
+    box-sizing    : border-box;
+    text-align    : center;
+    font-size     : 15px;
+}
+.reg_form_textfield::placeholder {
+    font-weight : bold;
+}
+/* Submit Button Styling */
+.reg_form_submit_button {
+    display          : inline-block;
+    border-radius    : 4px;
+    background-color : #4CAF50; /* Green */
+    border           : none;
+    color            : #FFFFFF;
+    text-align       : center;
+    font-size        : 15px;
+    width            : 20%;
+    padding          : 10px;
+    margin           : 8px;
+    transition       : all 0.5s;
+    cursor           : pointer;
+}
+.reg_form_submit_button span {
+    cursor     : pointer;
+    display    : inline-block;
+    position   : relative;
+    transition : 0.5s;
+}
+.reg_form_submit_button span:after {
+    content    : '\00bb';
+    position   : absolute;
+    opacity    : 0;
+    top        : 0;
+    right      : -10px;
+    transition : 0.5s;
+}
+.reg_form_submit_button:hover span {
+    padding-right : 15px;
+}
+.reg_form_submit_button:hover span:after {
+    opacity : 100;
+    right   : 0;
+}
+/* Message to display when user presses on the password text input, list of what password must contain */
+#message {
+    display          : none;
+    background-color : lightgrey;
+    width            : 60%;
+    color            : #000;
+    position         : relative;
+    padding          : 20px;
+    margin-top       : 10px;
+    border-radius    : 12px;
+}
+#message p {
+    padding   : 10px 35px;
+    font-size : 18px;
+}
+/* Change the message text to green when one of the password parameters are correct */
+.valid {
+    color : #4CAF50; /* Green */
+}
+.valid:before {
+    position : relative;
+    left     : -35px;
+    content  : "✔";
+}
+.invalid {
+    color : red;
+}
+.invalid:before {
+    position : relative;
+    left     : -35px;
+    content  : "✖";
+}

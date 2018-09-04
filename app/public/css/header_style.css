@@ -1,0 +1,18 @@
+header {
+    width     : 100%;
+    padding   : 10px;
+    font-size : 20px;
+    color     : #9d9d9d;
+}
+header a {
+    color           : #9d9d9d;
+    text-decoration : none;
+    margin-left     : 20px;
+}
+header i {
+    float        : right;
+    margin-right : 25px;
+}
+header a:hover, header i:hover {
+    color : #000000;
+}

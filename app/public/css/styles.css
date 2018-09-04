@@ -1,0 +1,14 @@
+* {
+    margin     : 0;
+    padding    : 0;
+}
+body {
+    font-family : "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/*!* Page Content Styling *!*/
+/*div {*/
+    /*width  : 80%;*/
+    /*margin : auto;*/
+    /*height : auto;*/
+/*}*/

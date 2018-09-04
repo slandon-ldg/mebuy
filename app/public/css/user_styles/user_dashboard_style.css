@@ -1,0 +1,27 @@
+.dashboard {
+    width            : 100%;
+    overflow         : hidden;
+    display          : flex;
+}
+.sidebar_nav {
+    width      : 25%;
+    float      : left;
+    text-align : left;
+    font-size  : 18px;
+}
+ul {
+    list-style-type: none;
+}
+.sidebar_nav li {
+    color : #9d9d9d;
+}
+
+@media screen and (max-width: 400px) {
+    .icon i {
+        font-size: 35px;
+        display : block;
+    }
+    .text {
+        display : none;
+    }
+}

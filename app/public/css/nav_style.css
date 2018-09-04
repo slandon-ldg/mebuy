@@ -1,0 +1,50 @@
+.nav_bar_container {
+    text-align : right;
+}
+.nav li {
+    display : inline-block;
+    margin  : 5px 15px 5px 0;
+}
+.nav li, a, i {
+    text-decoration : none;
+    color           : #9d9d9d;
+}
+.li_content:hover a, .li_content:hover i {
+    color : black;
+}
+/* Hamburger Menu, when screen size goes below, then show */
+@media screen and (max-width : 420px) {
+    .nav li {
+        display : none;
+    }
+    .hamburger_container {
+        margin-left : 10px;
+    }
+    .bar1, .bar2, .bar3 {
+        display          : block;
+        width            : 35px;
+        height           : 5px;
+        background-color : black;
+        margin           : 6px 0;
+        transition       : 0.4s;
+        cursor           : pointer;
+    }
+    .change .bar1 {
+        -webkit-transform : rotate(-45deg) translate(-9px, 6px);
+        transform         : rotate(-45deg) translate(-9px, 6px);
+    }
+    .change .bar2 {
+        opacity : 0;
+    }
+    .change .bar3 {
+        -webkit-transform : rotate(45deg) translate(-8px, -8px);
+        transform         : rotate(45deg) translate(-8px, -8px);
+    }
+    .nav.responsive li {
+        display : block;
+        margin  : 5px 15px 5px 0;
+    }
+    .nav.responsive {
+        text-align: center;
+    }
+}
