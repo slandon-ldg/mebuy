@@ -11,48 +11,59 @@ if (!isset($_SESSION['user_email'])) { ?>
             <ul class="nav" id="nav">
                 <li>
                     <div class="li_content">
-                        <a><i class="fas fa-sign-in-alt"></i></a>
-                        <a id="login_btn">Sign In</a>
+                        <a id="login_btn"><i class="fas fa-sign-in-alt"></i> Sign In</a>
                     </div>
                 </li>
                 <li>
                     <div class="li_content">
-                        <a href="register"><i class="far fa-user"></i></a>
-                        <a href="register">Sign Up</a>
+                        <a href="register"><i class="far fa-user"></i> Sign Up</a>
                     </div>
                 </li>
             </ul>
         </nav>
     </div>
+<?php } else { ?>
+    <div class="nav_bar_container">
+        <div class="hamburger_container" onclick="hamburgerToggle(this); myFunction()">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+        <nav>
+            <ul class="nav" id="nav">
+                <!-- This is the hamburger li content. Only show these elements when the screen size is small -->
+                <div class="hamburger_content">
+                    <div class="li_content">
+                        <li>
+                            <a href="user_account"><i class="fas fa-user-circle"></i> Your Account</a>
+                        </li>
+                    </div>
+                    <div class="li_content">
+                        <li>
+                            <a href="logout"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+                        </li>
+                    </div>
+                </div>
+                <!-- End of hamburger li content -->
+                <!-- Dropdown li content once a user has signed in -->
+                <li>
+                    <div class="li_content">
+                        <button class="dropbtn" onclick="nav_dropdownFunction()"><?php echo $_SESSION['user_email'] ?>
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                    </div>
+                    <div class="dropdown_content" id="myDropdown">
+                        <div class="li_content">
+                            <a href="user_account"><i class="fas fa-user-circle"></i> Your Account</a></div>
+                        <div class="li_content">
+                            <a href="logout"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+                        </div>
+                    </div>
+                </li>
+                <!-- End of Dropdown li content -->
+            </ul>
+        </nav>
+    </div>
 <?php } ?>
-
-
-<!--//if (isset($_SESSION['user_email'])) { ?>-->
-<!--    <div id="wrapper">-->
-<!--        <div class="container" onclick="hamburgerToggle(this); myFunction()">-->
-<!--            <div class="bar1"></div>-->
-<!--            <div class="bar2"></div>-->
-<!--            <div class="bar3"></div>-->
-<!--        </div>-->
-<!--        <ul class="nav" id="nav">-->
-<!--            <li class="right">-->
-<!--                <button class="dropbtn" onclick="nav_dropdownFunction()">-->
-<!--                    <i class="fas fa-user-circle"></i>-->
-<!--                    --><?php //echo $_SESSION['user_email']; ?>
-<!--                    <i class="fa fa-caret-down"></i>-->
-<!--                </button>-->
-<!--                <div class="dropdown-content" id="myDropdown">-->
-<!--                    <div class="myHover">-->
-<!--                        <a href="user_account"><i class="fas fa-user-circle"></i></a>-->
-<!--                        <a href="user_account">Your Account</a>-->
-<!--                    </div>-->
-<!--                    <div class="myHover">-->
-<!--                        <a href="logout"><i class="fas fa-sign-out-alt"></i></a>-->
-<!--                        <a href="logout">Sign Out</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </div>-->
 
 <?php include('app/views/users_view/login.view.php'); ?>
