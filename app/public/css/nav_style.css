@@ -1,5 +1,6 @@
 .nav_bar_container {
-    text-align : right;
+    text-align   : right;
+    margin-right : 80px;
 }
 .nav li {
     display : inline-block;
@@ -45,6 +46,11 @@
 }
 .show {
     display : block;
+}
+@media screen and (max-width : 420px) {
+    .nav_bar_container {
+        margin-right : 0;
+    }
 }
 /* Hamburger Menu, when screen size goes below, then show */
 @media screen and (max-width : 420px) {

@@ -12,13 +12,16 @@
 
 <header>
     <a href="/">Logo</a>
-    <i class="fas fa-shopping-cart"></i>
 
-    <div class="search-container">
-        <form action="/">
-            <input class="header_text" type="text" placeholder="Search..." name="search">
-            <button type="submit"><i class="fa fa-search"></i></button>
-        </form>
+    <div class="header_div">
+        <i class="fas fa-shopping-cart"></i>
+
+        <div class="search-container">
+            <form action="/">
+                <input class="header_text" type="text" placeholder="Search..." name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
     </div>
 
 </header>
@@ -28,7 +31,7 @@ ob_start();
 if (!session_id()) session_start();
 require('nav.view.php');
 
-if (isset($error)){
+if (isset($error)) {
     echo "<h3>" . $error . "</h3>";
 }
 ?>
