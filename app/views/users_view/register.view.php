@@ -13,8 +13,8 @@
 <div class="registration_form">
 
     <form class="user_reg_form" action="register" method="post">
-        <input class="reg_form_textfield" type="text" id="fname" name="fname" placeholder="First Name" required>
-        <input class="reg_form_textfield" type="text" id="lname" name="lname" placeholder="Last Name" required>
+        <input class="reg_form_textfield" id="fname" name="fname" placeholder="First Name" required>
+        <input class="reg_form_textfield" id="lname" name="lname" placeholder="Last Name" required>
 
         <br>
 

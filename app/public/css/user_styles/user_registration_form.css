@@ -67,8 +67,12 @@ h1 {
     color            : #000000;
     position         : relative;
     padding          : 20px;
-    margin-top       : 10px;
     border-radius    : 12px;
+    margin           : auto;
+    top              : 0;
+    left             : 0;
+    bottom           : 0;
+    right            : 0;
 }
 #message p {
     padding   : 10px 35px;

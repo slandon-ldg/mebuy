@@ -17,13 +17,24 @@ class UsersController
     {
         return view('users_view/register');
     }
+
     // Post Functionality //
     public function user_registration()
     {
+        // Need to check if email already exists when creating account, don't want duplicate email accounts
+        // could be done similar to the way that log in is achieved, store in a variable
+        // inside of QueryBuilder, use it to return true or false whether duplicate emails
         $pword = $_POST['pword'];
         $hash  = password_hash($pword, PASSWORD_BCRYPT);
 
-        // need to change this back to correct page after successful login
+        $email_check = App::get('database')->checkUserRegistrationDetails($_POST['email']);
+
+        if (!$email_check) {
+            return view("index", [
+                'error' => 'Email already exists'
+            ]);
+        }
+
         App::get('database')->insert('users', [
             'first_name'    => $_POST['fname'],
             'last_name'     => $_POST['lname'],
@@ -32,7 +43,7 @@ class UsersController
         ]);
 
         return view("index", [
-            'user_name' => $_POST['fname']
+            'error' => 'Account Created'
         ]);
     }
 
@@ -41,6 +52,7 @@ class UsersController
     {
         return view('users_view/user_login');
     }
+
     // Post Functionality //
     public function user_login()
     {

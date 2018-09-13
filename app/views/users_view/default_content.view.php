@@ -7,6 +7,8 @@
  */
 ?>
 
+<link rel="stylesheet" href="app/public/css/user_styles/login_modal_popup.css">
+
 <?php
 echo "<h1>Welcome " . $_SESSION['user_email'] . "</h1>";
 ?>
