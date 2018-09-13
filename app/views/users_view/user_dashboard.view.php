@@ -29,6 +29,12 @@
                     <a href="user_account?nav=billing_details"><i class="far fa-credit-card"></i> Billing</a>
                 </li>
             </div>
+            <div class="li_content">
+                <li>
+                    <i class="small_nav far fa-clipboard"></i>
+                    <a href="user_account?nav=order_details"><i class="far fa-clipboard"></i> Your Orders</a>
+                </li>
+            </div>
         </ul>
     </nav>
 
@@ -47,6 +53,10 @@
     <!-- Dynamic Section 3 -->
     <article id="billing_details" class="dynamic-content">
         <?php require('app/views/users_view/billing_details.view.php') ?>
+    </article>
+    <!-- Dynamic Section 4 -->
+    <article id="order_details" class="dynamic-content">
+        <?php require('app/views/users_view/order_details.view.php') ?>
     </article>
 
 </section>

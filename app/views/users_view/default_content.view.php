@@ -7,9 +7,21 @@
  */
 ?>
 
-<link rel="stylesheet" href="app/public/css/user_styles/login_modal_popup.css">
-
 <?php
+echo "<h1>Welcome " . $_SESSION['user_id'] . "</h1>";
+echo "<h1>Welcome " . $_SESSION['first_name'] . "</h1>";
+echo "<h1>Welcome " . $_SESSION['last_name'] . "</h1>";
 echo "<h1>Welcome " . $_SESSION['user_email'] . "</h1>";
 ?>
 <p>Please use the links on the side to navigate to your account details. </p>
+
+<?php
+if (isset($_POST['address_street'])  || isset($_POST['address_city']) || isset($_POST['address_postcode']) || isset($_POST['address_country']) || isset($_POST['address_phonenumber'])){
+    echo "<h1>" . $_SESSION['user_id'] . "</h1>";
+    echo "<h1>" . $_POST['address_street'] . "</h1>";
+    echo "<h1>" . $_POST['address_city'] . "</h1>";
+    echo "<h1>" . $_POST['address_postcode'] . "</h1>";
+    echo "<h1>" . $_POST['address_country'] . "</h1>";
+    echo "<h1>" . $_POST['address_phonenumber'] . "</h1>";
+}
+?>

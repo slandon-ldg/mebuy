@@ -43,7 +43,7 @@ class UsersController
         ]);
 
         return view("index", [
-            'error' => 'Account Created'
+            'success' => 'Account Created, now please log in'
         ]);
     }
 
@@ -66,7 +66,9 @@ class UsersController
                 'error' => 'Incorrect Username or Password. Please try again'
             ]);
         }
-        return view('users_view/user_dashboard');
+        return view('users_view/user_dashboard', [
+            'success' => 'Login Successful'
+        ]);
     }
 
     // Get Functionality // User Logout //
@@ -81,6 +83,45 @@ class UsersController
     public function user_account_page()
     {
         return view('users_view/user_dashboard');
+    }
+
+    public function user_update_personal_info()
+    {
+        $user_fname = $_POST['update_fname'];
+        $user_lname = $_POST['update_lname'];
+        $user_email = $_POST['update_email'];
+
+        $update = App::get('database')->updateUserPersonalDetails($user_fname, $user_lname, $user_email);
+
+        if (!$update) {
+            return view("index", [
+                'error' => 'Error please try again'
+            ]);
+        }
+        return view('users_view/user_dashboard', [
+            'success' => 'Personal Details Successfully Changed'
+        ]);
+    }
+
+    public function user_update_address_info()
+    {
+        $street      = $_POST['address_street'];
+        $city        = $_POST['address_city'];
+        $postcode    = $_POST['address_postcode'];
+        $country     = $_POST['address_country'];
+        $phonenumber = $_POST['address_phonenumber'];
+
+        $address = App::get('database')->updateUserAddressDetails($street, $city, $postcode, $country, $phonenumber);
+
+        if (!$address) {
+            return view("index", [
+                'error' => 'Error please try again'
+            ]);
+        }
+
+        return view('users_view/user_dashboard', [
+            'success' => 'Address Updated'
+        ]);
     }
 
 }

@@ -1,14 +1,36 @@
 * {
-    margin     : 0;
-    padding    : 0;
+    margin  : 0;
+    padding : 0;
 }
 body {
     font-family : "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-
-/*!* Page Content Styling *!*/
+/* Page Content Styling */
 .page_content {
     width  : 80%;
     margin : auto;
     height : auto;
+}
+/* Success & Error Styling, this should be used across all pages in case of error */
+.error {
+    background-color : #F2DEDE;
+    padding          : 15px;
+    border           : 1px solid transparent;
+    border-radius    : 4px;
+    margin           : 10px 10px 20px 10px;
+}
+.error_message {
+    font-size : 20px;
+    color     : #A94442;
+}
+.success {
+    background-color : #DFF0D8;
+    padding          : 15px;
+    border           : 1px solid transparent;
+    border-radius    : 4px;
+    margin           : 10px 10px 20px 10px;
+}
+.success_message {
+    font-size : 20px;
+    color     : #3C763D;
 }

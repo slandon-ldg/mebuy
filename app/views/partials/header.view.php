@@ -32,7 +32,13 @@ if (!session_id()) session_start();
 require('nav.view.php');
 
 if (isset($error)) {
-    echo "<h3>" . $error . "</h3>";
+    echo "<div class='error'>
+          <strong class='error_message'>"
+          . $error .
+          "</strong>
+          </div>";
+} else if (isset($success)) {
+    echo "<div class='success'><h3 class='success_message'>" . $success . "</h3></div>";
 }
 ?>
 

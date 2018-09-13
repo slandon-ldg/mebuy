@@ -12,17 +12,21 @@ let dynamicContent = getParameterByName('nav');
 
 $(document).ready(function() {
 
-    // Check if the URL parameter is apples
+    // Check if the URL parameter is personal details
     if (dynamicContent === 'personal_details') {
         $('#personal_details').show();
     }
-    // Check if the URL parameter is oranges
+    // Check if the URL parameter is address details
     else if (dynamicContent === 'address_details') {
         $('#address_details').show();
     }
-    // Check if the URL parameter is bananas
+    // Check if the URL parameter is billing details
     else if (dynamicContent === 'billing_details') {
         $('#billing_details').show();
+    }
+    // Check if the URL parameter is billing details
+    else if (dynamicContent === 'order_details') {
+        $('#order_details').show();
     }
     // Check if the URL parameter is empty or not defined, display default content
     else {
