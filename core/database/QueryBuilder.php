@@ -225,4 +225,43 @@ class QueryBuilder
         return false;
     }
 
+    public function getUserActiveBillingDetails()
+    {
+        if (!session_id()) session_start();
+        if (!empty($_SESSION['user_id'])) {
+            $billAddressStatement = $this->pdo->prepare(
+                "select * from customer_billing_address 
+                           where customer_billing_address.user_id = '" . $_SESSION['user_id'] . "'
+                           and customer_billing_address.active_address = '1'                          
+            ");
+            $billAddressStatement->execute();
+
+            $userStatement = $this->pdo->prepare(
+                "select * from users 
+                           where users.user_id = '" . $_SESSION['user_id'] . "'                          
+            ");
+            $userStatement->execute();
+
+            $billAddressRow      = $billAddressStatement->fetch(PDO::FETCH_ASSOC);
+            $billAddressRowCount = $billAddressStatement->rowCount();
+
+            $userRow      = $userStatement->fetch(PDO::FETCH_ASSOC);
+            $userRowCount = $userStatement->rowCount();
+
+            if ($billAddressRowCount === 1 || $userRowCount === 1) {
+                return [
+                    'bill_fname'          => $userRow['first_name'],
+                    'bill_lname'          => $userRow['last_name'],
+                    'bill_email'          => $userRow['email_address'],
+                    'bill_street_address' => $billAddressRow['street_address'],
+                    'bill_city'           => $billAddressRow['city'],
+                    'bill_postcode'       => $billAddressRow['postcode'],
+                    'bill_country'        => $billAddressRow['country'],
+                    'bill_phone_number'   => $billAddressRow['phone_number']
+                ];
+            }
+        }
+        return false;
+    }
+
 }

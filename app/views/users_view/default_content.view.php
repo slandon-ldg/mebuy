@@ -49,5 +49,38 @@ echo "<h1>Welcome " . $_SESSION['first_name'] . " " . $_SESSION['last_name'] . "
         </div>
     </div>
 
+    <div class="address_container">
+        <h3 class="address_card_header">Billing Address</h3>
+        <div class="address_card_content">
+            <?php
+            if (isset($bill_first_name)
+                && isset($bill_last_name)
+                && isset($bill_email)
+                && isset($bill_street_address)
+                && isset($bill_city)
+                && isset($bill_postcode)
+                && isset($bill_country)
+                && isset($bill_phone_number)
+            ) {
+                echo "<p>" . $bill_first_name . " " . $bill_last_name . "</p>";
+                echo "<p>" . $bill_email . "</p>";
+                echo "<p>" . $bill_street_address . "</p>";
+                echo "<p>" . $bill_city . "</p>";
+                echo "<p>" . $bill_postcode . "</p>";
+                echo "<p>" . $bill_country . "</p>";
+                echo "<p>" . $bill_phone_number . "</p>";
+            } else {
+                echo "<div class='li_content'>";
+                echo "<li>";
+                echo "<i class='small_nav fas fa-user-circle'></i>";
+                echo "Please fill out the <a href='user_account?nav=billing_details'><i class='fas fa-user-circle'></i> Billing Info</a> Section";
+                echo "</li>";
+                echo "</div>";
+            }
+            ?>
+        </div>
+    </div>
+
+
 </div>
 <br>

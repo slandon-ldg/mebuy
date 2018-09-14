@@ -67,17 +67,26 @@ class UsersController
             ]);
         }
 
-        $checkUserDetails = App::get('database')->getUserActiveShippingDetails();
+        $checkUserDetails        = App::get('database')->getUserActiveShippingDetails();
+        $checkUserBillingDetails = App::get('database')->getUserActiveBillingDetails();
 
         return view('users_view/user_dashboard', [
-            'first_name'     => $checkUserDetails['fname'],
-            'last_name'      => $checkUserDetails['lname'],
-            'email'          => $checkUserDetails['email'],
-            'street_address' => $checkUserDetails['street_address'],
-            'city'           => $checkUserDetails['city'],
-            'postcode'       => $checkUserDetails['postcode'],
-            'country'        => $checkUserDetails['country'],
-            'phone_number'   => $checkUserDetails['phone_number']
+            'first_name'          => $checkUserDetails['fname'],
+            'last_name'           => $checkUserDetails['lname'],
+            'email'               => $checkUserDetails['email'],
+            'street_address'      => $checkUserDetails['street_address'],
+            'city'                => $checkUserDetails['city'],
+            'postcode'            => $checkUserDetails['postcode'],
+            'country'             => $checkUserDetails['country'],
+            'phone_number'        => $checkUserDetails['phone_number'],
+            'bill_first_name'     => $checkUserBillingDetails['bill_fname'],
+            'bill_last_name'      => $checkUserBillingDetails['bill_lname'],
+            'bill_email'          => $checkUserBillingDetails['bill_email'],
+            'bill_street_address' => $checkUserBillingDetails['bill_street_address'],
+            'bill_city'           => $checkUserBillingDetails['bill_city'],
+            'bill_postcode'       => $checkUserBillingDetails['bill_postcode'],
+            'bill_country'        => $checkUserBillingDetails['bill_country'],
+            'bill_phone_number'   => $checkUserBillingDetails['bill_phone_number']
         ]);
     }
 
@@ -92,17 +101,26 @@ class UsersController
     // Get Functionality //
     public function user_account_page()
     {
-        $checkUserDetails = App::get('database')->getUserActiveShippingDetails();
+        $checkUserDetails        = App::get('database')->getUserActiveShippingDetails();
+        $checkUserBillingDetails = App::get('database')->getUserActiveBillingDetails();
 
         return view('users_view/user_dashboard', [
-            'first_name'     => $checkUserDetails['fname'],
-            'last_name'      => $checkUserDetails['lname'],
-            'email'          => $checkUserDetails['email'],
-            'street_address' => $checkUserDetails['street_address'],
-            'city'           => $checkUserDetails['city'],
-            'postcode'       => $checkUserDetails['postcode'],
-            'country'        => $checkUserDetails['country'],
-            'phone_number'   => $checkUserDetails['phone_number']
+            'first_name'          => $checkUserDetails['fname'],
+            'last_name'           => $checkUserDetails['lname'],
+            'email'               => $checkUserDetails['email'],
+            'street_address'      => $checkUserDetails['street_address'],
+            'city'                => $checkUserDetails['city'],
+            'postcode'            => $checkUserDetails['postcode'],
+            'country'             => $checkUserDetails['country'],
+            'phone_number'        => $checkUserDetails['phone_number'],
+            'bill_first_name'     => $checkUserBillingDetails['bill_fname'],
+            'bill_last_name'      => $checkUserBillingDetails['bill_lname'],
+            'bill_email'          => $checkUserBillingDetails['bill_email'],
+            'bill_street_address' => $checkUserBillingDetails['bill_street_address'],
+            'bill_city'           => $checkUserBillingDetails['bill_city'],
+            'bill_postcode'       => $checkUserBillingDetails['bill_postcode'],
+            'bill_country'        => $checkUserBillingDetails['bill_country'],
+            'bill_phone_number'   => $checkUserBillingDetails['bill_phone_number']
         ]);
     }
 
@@ -121,17 +139,26 @@ class UsersController
             ]);
         }
 
-        $checkUserDetails = App::get('database')->getUserActiveShippingDetails();
+        $checkUserDetails        = App::get('database')->getUserActiveShippingDetails();
+        $checkUserBillingDetails = App::get('database')->getUserActiveBillingDetails();
 
         return view('users_view/user_dashboard', [
-            'first_name'     => $checkUserDetails['fname'],
-            'last_name'      => $checkUserDetails['lname'],
-            'email'          => $checkUserDetails['email'],
-            'street_address' => $checkUserDetails['street_address'],
-            'city'           => $checkUserDetails['city'],
-            'postcode'       => $checkUserDetails['postcode'],
-            'country'        => $checkUserDetails['country'],
-            'phone_number'   => $checkUserDetails['phone_number']
+            'first_name'          => $checkUserDetails['fname'],
+            'last_name'           => $checkUserDetails['lname'],
+            'email'               => $checkUserDetails['email'],
+            'street_address'      => $checkUserDetails['street_address'],
+            'city'                => $checkUserDetails['city'],
+            'postcode'            => $checkUserDetails['postcode'],
+            'country'             => $checkUserDetails['country'],
+            'phone_number'        => $checkUserDetails['phone_number'],
+            'bill_first_name'     => $checkUserBillingDetails['bill_fname'],
+            'bill_last_name'      => $checkUserBillingDetails['bill_lname'],
+            'bill_email'          => $checkUserBillingDetails['bill_email'],
+            'bill_street_address' => $checkUserBillingDetails['bill_street_address'],
+            'bill_city'           => $checkUserBillingDetails['bill_city'],
+            'bill_postcode'       => $checkUserBillingDetails['bill_postcode'],
+            'bill_country'        => $checkUserBillingDetails['bill_country'],
+            'bill_phone_number'   => $checkUserBillingDetails['bill_phone_number']
         ]);
     }
 
@@ -158,17 +185,26 @@ class UsersController
             ]);
         }
 
-        $checkUserDetails = App::get('database')->getUserActiveShippingDetails();
+        $checkUserDetails        = App::get('database')->getUserActiveShippingDetails();
+        $checkUserBillingDetails = App::get('database')->getUserActiveBillingDetails();
 
         return view('users_view/user_dashboard', [
-            'first_name'     => $checkUserDetails['fname'],
-            'last_name'      => $checkUserDetails['lname'],
-            'email'          => $checkUserDetails['email'],
-            'street_address' => $checkUserDetails['street_address'],
-            'city'           => $checkUserDetails['city'],
-            'postcode'       => $checkUserDetails['postcode'],
-            'country'        => $checkUserDetails['country'],
-            'phone_number'   => $checkUserDetails['phone_number']
+            'first_name'          => $checkUserDetails['fname'],
+            'last_name'           => $checkUserDetails['lname'],
+            'email'               => $checkUserDetails['email'],
+            'street_address'      => $checkUserDetails['street_address'],
+            'city'                => $checkUserDetails['city'],
+            'postcode'            => $checkUserDetails['postcode'],
+            'country'             => $checkUserDetails['country'],
+            'phone_number'        => $checkUserDetails['phone_number'],
+            'bill_first_name'     => $checkUserBillingDetails['bill_fname'],
+            'bill_last_name'      => $checkUserBillingDetails['bill_lname'],
+            'bill_email'          => $checkUserBillingDetails['bill_email'],
+            'bill_street_address' => $checkUserBillingDetails['bill_street_address'],
+            'bill_city'           => $checkUserBillingDetails['bill_city'],
+            'bill_postcode'       => $checkUserBillingDetails['bill_postcode'],
+            'bill_country'        => $checkUserBillingDetails['bill_country'],
+            'bill_phone_number'   => $checkUserBillingDetails['bill_phone_number']
         ]);
     }
 
