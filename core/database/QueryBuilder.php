@@ -152,11 +152,18 @@ class QueryBuilder
                 $updateActiveAddress = $this->pdo->prepare("update customer_address set customer_address.active_address = 0 where customer_address.user_id = '" . $_SESSION['user_id'] . "'");
 
                 $updateActiveAddress->execute();
+
+                $update_billing_address_statement = $this->pdo->prepare("update customer_billing_address set customer_billing_address.active_address = 0 where customer_billing_address.user_id = '" . $_SESSION['user_id'] . "'");
+
+                $update_billing_address_statement->execute();
             }
 
             $statement = $this->pdo->prepare("insert into customer_address (user_id, street_address, city, postcode, country, phone_number, active_address) VALUES ('" . $_SESSION['user_id'] . "', '" . $street . "', '" . $city . "', '" . $postcode . "', '" . $country . "', '" . $phonenumber . "', '1')");
 
+            $billing_address_statement = $this->pdo->prepare("insert into customer_billing_address (user_id, street_address, city, postcode, country, phone_number, active_address) VALUES ('" . $_SESSION['user_id'] . "', '" . $street . "', '" . $city . "', '" . $postcode . "', '" . $country . "', '" . $phonenumber . "', '1')");
+
             $statement->execute();
+            $billing_address_statement->execute();
 
             return true;
         }
@@ -176,5 +183,46 @@ class QueryBuilder
         return false;
     }
 
+    /**
+     * @return array|bool
+     */
+    public function getUserActiveShippingDetails()
+    {
+        if (!session_id()) session_start();
+        if (!empty($_SESSION['user_id'])) {
+            $addressStatement = $this->pdo->prepare(
+                "select * from customer_address 
+                           where customer_address.user_id = '" . $_SESSION['user_id'] . "'
+                           and customer_address.active_address = '1'                          
+            ");
+            $addressStatement->execute();
+
+            $userStatement = $this->pdo->prepare(
+                "select * from users 
+                           where users.user_id = '" . $_SESSION['user_id'] . "'                          
+            ");
+            $userStatement->execute();
+
+            $addressRow      = $addressStatement->fetch(PDO::FETCH_ASSOC);
+            $addressRowCount = $addressStatement->rowCount();
+
+            $userRow      = $userStatement->fetch(PDO::FETCH_ASSOC);
+            $userRowCount = $userStatement->rowCount();
+
+            if ($addressRowCount === 1 || $userRowCount === 1) {
+                return [
+                    'fname'          => $userRow['first_name'],
+                    'lname'          => $userRow['last_name'],
+                    'email'          => $userRow['email_address'],
+                    'street_address' => $addressRow['street_address'],
+                    'city'           => $addressRow['city'],
+                    'postcode'       => $addressRow['postcode'],
+                    'country'        => $addressRow['country'],
+                    'phone_number'   => $addressRow['phone_number']
+                ];
+            }
+        }
+        return false;
+    }
 
 }

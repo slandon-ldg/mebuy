@@ -66,8 +66,18 @@ class UsersController
                 'error' => 'Incorrect Username or Password. Please try again'
             ]);
         }
+
+        $checkUserDetails = App::get('database')->getUserActiveShippingDetails();
+
         return view('users_view/user_dashboard', [
-            'success' => 'Login Successful'
+            'first_name'     => $checkUserDetails['fname'],
+            'last_name'      => $checkUserDetails['lname'],
+            'email'          => $checkUserDetails['email'],
+            'street_address' => $checkUserDetails['street_address'],
+            'city'           => $checkUserDetails['city'],
+            'postcode'       => $checkUserDetails['postcode'],
+            'country'        => $checkUserDetails['country'],
+            'phone_number'   => $checkUserDetails['phone_number']
         ]);
     }
 
@@ -82,9 +92,21 @@ class UsersController
     // Get Functionality //
     public function user_account_page()
     {
-        return view('users_view/user_dashboard');
+        $checkUserDetails = App::get('database')->getUserActiveShippingDetails();
+
+        return view('users_view/user_dashboard', [
+            'first_name'     => $checkUserDetails['fname'],
+            'last_name'      => $checkUserDetails['lname'],
+            'email'          => $checkUserDetails['email'],
+            'street_address' => $checkUserDetails['street_address'],
+            'city'           => $checkUserDetails['city'],
+            'postcode'       => $checkUserDetails['postcode'],
+            'country'        => $checkUserDetails['country'],
+            'phone_number'   => $checkUserDetails['phone_number']
+        ]);
     }
 
+    // Post Functionality //
     public function user_update_personal_info()
     {
         $user_fname = $_POST['update_fname'];
@@ -98,11 +120,22 @@ class UsersController
                 'error' => 'Error please try again'
             ]);
         }
+
+        $checkUserDetails = App::get('database')->getUserActiveShippingDetails();
+
         return view('users_view/user_dashboard', [
-            'success' => 'Personal Details Successfully Changed'
+            'first_name'     => $checkUserDetails['fname'],
+            'last_name'      => $checkUserDetails['lname'],
+            'email'          => $checkUserDetails['email'],
+            'street_address' => $checkUserDetails['street_address'],
+            'city'           => $checkUserDetails['city'],
+            'postcode'       => $checkUserDetails['postcode'],
+            'country'        => $checkUserDetails['country'],
+            'phone_number'   => $checkUserDetails['phone_number']
         ]);
     }
 
+    // Post Functionality //
     public function user_update_address_info()
     {
         $street      = $_POST['address_street'];
@@ -125,8 +158,17 @@ class UsersController
             ]);
         }
 
+        $checkUserDetails = App::get('database')->getUserActiveShippingDetails();
+
         return view('users_view/user_dashboard', [
-            'success' => 'Address Updated'
+            'first_name'     => $checkUserDetails['fname'],
+            'last_name'      => $checkUserDetails['lname'],
+            'email'          => $checkUserDetails['email'],
+            'street_address' => $checkUserDetails['street_address'],
+            'city'           => $checkUserDetails['city'],
+            'postcode'       => $checkUserDetails['postcode'],
+            'country'        => $checkUserDetails['country'],
+            'phone_number'   => $checkUserDetails['phone_number']
         ]);
     }
 

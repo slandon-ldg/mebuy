@@ -38,7 +38,7 @@
             <div class="li_content">
                 <li>
                     <i class="small_nav far fa-clipboard"></i>
-                    <a href="user_account?nav=order_details"><i class="far fa-clipboard"></i> Your Orders</a>
+                    <a href="user_account?nav=order_details"><i class="far fa-clipboard"></i> Orders</a>
                 </li>
             </div>
         </ul>

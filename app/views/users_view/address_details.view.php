@@ -9,6 +9,7 @@
 
 <div class="personal_info_div">
     <h1>Address Details</h1>
+    <p>This is where your items will be delivered to</p>
     <p>Please fill in the fields for them to be updated</p>
 
     <form action="update_address_info" method="post">
