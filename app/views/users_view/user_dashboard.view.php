@@ -14,6 +14,12 @@
             <div class="li_content">
                 <li>
                     <i class="small_nav fas fa-user-circle"></i>
+                    <a href="user_account">Dashboard</a>
+                </li>
+            </div>
+            <div class="li_content">
+                <li>
+                    <i class="small_nav fas fa-user-circle"></i>
                     <a href="user_account?nav=personal_details"><i class="fas fa-user-circle"></i> Personal</a>
                 </li>
             </div>

@@ -101,6 +101,12 @@ class QueryBuilder
         return false;
     }
 
+    /**
+     * @param $fname
+     * @param $lname
+     * @param $email
+     * @return bool
+     */
     public function updateUserPersonalDetails($fname, $lname, $email)
     {
         session_start();
@@ -118,11 +124,50 @@ class QueryBuilder
         return false;
     }
 
-    public function updateUserAddressDetails($street, $city, $postcode, $country, $phonenumber)
+    /**
+     * @param $street
+     * @param $city
+     * @param $postcode
+     * @param $country
+     * @param $phonenumber
+     * @param $active_shipping_address
+     * @return bool
+     */
+    public function updateUserAddressDetails($street, $city, $postcode, $country, $phonenumber, $active_shipping_address)
     {
         session_start();
-        if (!empty($street) || !empty($city) || !empty($postcode) || !empty($country) || !empty($phonenumber)) {
-            $statement = $this->pdo->prepare("insert into customer_address (user_id, street_address, city, postcode, country, phone_number) VALUES ('" . $_SESSION['user_id'] . "', '" . $street . "', '" . $city . "', '" . $postcode . "', '" . $country. "', '" . $phonenumber . "')");
+        if (!empty($street)
+            && !empty($city)
+            && !empty($postcode)
+            && !empty($country)
+            && !empty($phonenumber)
+            && !empty($active_shipping_address)
+        ) {
+            $getActiveAddress = $this->pdo->prepare("select * from customer_address where customer_address.user_id = '" . $_SESSION['user_id'] . "' and customer_address.active_address = 1");
+
+            $getActiveAddress->execute();
+            $count = $getActiveAddress->rowCount();
+
+            if ($count === 1) {
+                $updateActiveAddress = $this->pdo->prepare("update customer_address set customer_address.active_address = 0 where customer_address.user_id = '" . $_SESSION['user_id'] . "'");
+
+                $updateActiveAddress->execute();
+            }
+
+            $statement = $this->pdo->prepare("insert into customer_address (user_id, street_address, city, postcode, country, phone_number, active_address) VALUES ('" . $_SESSION['user_id'] . "', '" . $street . "', '" . $city . "', '" . $postcode . "', '" . $country . "', '" . $phonenumber . "', '1')");
+
+            $statement->execute();
+
+            return true;
+        }
+        if (!empty($street)
+            && !empty($city)
+            && !empty($postcode)
+            && !empty($country)
+            && !empty($phonenumber)
+            && empty($active_shipping_address)
+        ) {
+            $statement = $this->pdo->prepare("insert into customer_address (user_id, street_address, city, postcode, country, phone_number, active_address) VALUES ('" . $_SESSION['user_id'] . "', '" . $street . "', '" . $city . "', '" . $postcode . "', '" . $country . "', '" . $phonenumber . "', '0')");
 
             $statement->execute();
 
@@ -130,6 +175,6 @@ class QueryBuilder
         }
         return false;
     }
-    
+
 
 }

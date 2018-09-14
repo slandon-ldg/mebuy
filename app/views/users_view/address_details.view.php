@@ -18,15 +18,21 @@
         <input class="user_dashboard_inputfields" id="address_city" name="address_city" placeholder="City" required>
 
         <input class="user_dashboard_inputfields" id="address_postcode" name="address_postcode" placeholder="Postcode"
-               required>
+               pattern="^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)$"
+               required
+               oninvalid="this.setCustomValidity('Please enter a correct UK Postcode & Uppercase')"
+               onchange="this.setCustomValidity('')">
 
         <input class="user_dashboard_inputfields" id="address_country" name="address_country" placeholder="Country"
                required>
 
         <input class="user_dashboard_inputfields" id="address_phonenumber" name="address_phonenumber"
-               placeholder="Phone Number" required>
+               placeholder="Phone Number" pattern="^(?:0|\+?44)(?:\d\s?){9,10}$" required>
 
         <br>
+
+        <input type="checkbox" id="active_shipping_address" name="active_shipping_address"> Set as Default Shipping
+        Address<br>
 
         <button class="user_dashboard_submit_button" style="vertical-align:middle"><span>Submit</span></button>
 

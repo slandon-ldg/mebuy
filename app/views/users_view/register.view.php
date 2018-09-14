@@ -41,4 +41,3 @@
 
 <?php require('app/views/partials/footer.view.php'); ?>
 
-

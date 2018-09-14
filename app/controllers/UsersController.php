@@ -111,7 +111,13 @@ class UsersController
         $country     = $_POST['address_country'];
         $phonenumber = $_POST['address_phonenumber'];
 
-        $address = App::get('database')->updateUserAddressDetails($street, $city, $postcode, $country, $phonenumber);
+        if (isset($_POST['active_shipping_address'])) {
+            $active_shipping_address = 1;
+        } else {
+            $active_shipping_address = 0;
+        }
+
+        $address = App::get('database')->updateUserAddressDetails($street, $city, $postcode, $country, $phonenumber, $active_shipping_address);
 
         if (!$address) {
             return view("index", [
