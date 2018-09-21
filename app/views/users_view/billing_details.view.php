@@ -9,8 +9,9 @@
 
 <div class="personal_info_div">
     <h1>Billing Address Details</h1>
-    <p>This is where your items will be delivered to</p>
+    <p>This is where your items will be Billed to</p>
     <p>Please fill in the fields for them to be updated</p>
+    <p>This will be your active Billing Address</p>
 
     <form action="update_bill_address_info" method="post">
         <input class="user_dashboard_inputfields_street" id="bill_address_street" name="bill_address_street" placeholder="Street"
@@ -31,9 +32,6 @@
                placeholder="Phone Number" pattern="^(?:0|\+?44)(?:\d\s?){9,10}$" required>
 
         <br>
-
-        <input type="checkbox" id="bill_active_shipping_address" name="active_shipping_address"> Set as Default Billing
-        Address<br>
 
         <button class="user_dashboard_submit_button" style="vertical-align:middle"><span>Submit</span></button>
 

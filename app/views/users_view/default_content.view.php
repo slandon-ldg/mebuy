@@ -9,12 +9,11 @@
 
 <link rel="stylesheet" href="app/public/css/user_styles/user_address_details.css">
 
-<?php
-echo "<h1>Welcome " . $_SESSION['first_name'] . " " . $_SESSION['last_name'] . "</h1>";
-?>
-<p>Please use the links on the side to navigate to your account details. </p>
-
 <div class="address_card_holder">
+    <?php
+    echo "<h1>Welcome " . $_SESSION['first_name'] . " " . $_SESSION['last_name'] . "</h1>";
+    ?>
+    <p>Please use the links on the side to navigate to your account details. </p>
     <h1>Account Information</h1>
 
     <div class="address_container">

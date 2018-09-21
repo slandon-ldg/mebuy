@@ -110,7 +110,7 @@ class QueryBuilder
      */
     public function updateUserPersonalDetails($fname, $lname, $email)
     {
-        session_start();
+        if (!session_id()) session_start();
         if (!empty($fname) || !empty($lname) || !empty($email)) {
             $statement = $this->pdo->prepare("update users set users.first_name = '" . $fname . "', users.last_name = '" . $lname . "', users.email_address = '" . $email . "' where users.user_id = '" . $_SESSION['user_id'] . "'");
 
@@ -132,11 +132,12 @@ class QueryBuilder
      * @param $country
      * @param $phonenumber
      * @param $active_shipping_address
+     * @param $active_billing_address
      * @return bool
      */
-    public function updateUserAddressDetails($street, $city, $postcode, $country, $phonenumber, $active_shipping_address)
+    public function updateUserAddressDetails($street, $city, $postcode, $country, $phonenumber, $active_shipping_address, $active_billing_address)
     {
-        session_start();
+        if (!session_id()) session_start();
         if (!empty($street)
             && !empty($city)
             && !empty($postcode)
@@ -161,14 +162,45 @@ class QueryBuilder
                 ");
                 $addAddress->execute();
             }
+
+            if ($active_billing_address === 1) {
+                $removeExisting = $this->pdo->prepare("
+                    delete from customer_billing_address where (user_id = '" . $_SESSION['user_id'] . "');
+                ");
+                $removeExisting->execute();
+
+                // Then add the new address
+                $addBillingAddress = $this->pdo->prepare("
+                  insert into customer_billing_address (user_id, street_address, city, postcode, country, phone_number, active_address) values ('" . $_SESSION['user_id'] . "', '" . $street . "', '" . $city . "', '" . $postcode . "', '" . $country . "', '" . $phonenumber . "', '1')
+                ");
+                $addBillingAddress->execute();
+            }
             return true;
         }
         return false;
     }
 
-    public function updateUserBillingDetails($street, $city, $postcode, $country, $phonenumber, $active_billing_address)
+    public function updateUserBillingDetails($street, $city, $postcode, $country, $phonenumber)
     {
-        return false;
+        if (!session_id()) session_start();
+        if (!empty($street)
+            && !empty($city)
+            && !empty($postcode)
+            && !empty($country)
+            && !empty($phonenumber)
+        ) {
+            $removeExisting = $this->pdo->prepare("
+                    delete from customer_billing_address where (user_id = '" . $_SESSION['user_id'] . "');
+                ");
+            $removeExisting->execute();
+
+            // Then add the new address
+            $addBillingAddress = $this->pdo->prepare("
+                  insert into customer_billing_address (user_id, street_address, city, postcode, country, phone_number, active_address) values ('" . $_SESSION['user_id'] . "', '" . $street . "', '" . $city . "', '" . $postcode . "', '" . $country . "', '" . $phonenumber . "', '1')
+                ");
+            $addBillingAddress->execute();
+        }
+        return true;
     }
 
     /**
@@ -192,6 +224,30 @@ class QueryBuilder
                     'postcode'       => $activeAddressRow['postcode'],
                     'country'        => $activeAddressRow['country'],
                     'phone_number'   => $activeAddressRow['phone_number'],
+                ];
+            }
+        }
+        return false;
+    }
+
+    public function getUserActiveBillingDetails()
+    {
+        if (!session_id()) session_start();
+        if (!empty($_SESSION['user_id'])) {
+            $activeBillAddressStatement = $this->pdo->prepare("
+                select * from customer_billing_address where customer_billing_address.user_id = '" . $_SESSION['user_id'] . "' and customer_billing_address.active_address = '1'
+            ");
+            $activeBillAddressStatement->execute();
+            $activeBillAddressRow      = $activeBillAddressStatement->fetch(PDO::FETCH_ASSOC);
+            $activeBillAddressRowCount = $activeBillAddressStatement->rowCount();
+
+            if ($activeBillAddressRowCount === 1) {
+                return [
+                    'bill_street_address' => $activeBillAddressRow['street_address'],
+                    'bill_city'           => $activeBillAddressRow['city'],
+                    'bill_postcode'       => $activeBillAddressRow['postcode'],
+                    'bill_country'        => $activeBillAddressRow['country'],
+                    'bill_phone_number'   => $activeBillAddressRow['phone_number'],
                 ];
             }
         }
