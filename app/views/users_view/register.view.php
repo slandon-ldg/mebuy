@@ -13,16 +13,21 @@
 <div class="registration_form">
 
     <form class="user_reg_form" action="register" method="post">
-        <input class="reg_form_textfield" id="fname" name="fname" placeholder="First Name" required>
-        <input class="reg_form_textfield" id="lname" name="lname" placeholder="Last Name" required>
+        <input class="reg_form_textfield" id="fname" name="fname"
+               placeholder="First Name" required>
+        <input class="reg_form_textfield" id="lname" name="lname"
+               placeholder="Last Name" required>
 
         <br>
 
-        <input type="email" class="reg_form_textfield" id="email" name="email" placeholder="Email Address" required>
+        <input type="email" class="reg_form_textfield" id="email" name="email"
+               placeholder="Email Address" required>
 
         <br>
 
-        <input type="password" class="reg_form_textfield" id="pword" name="pword" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+        <input type="password" class="reg_form_textfield" id="pword" name="pword"
+               placeholder="Password"
+               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
 
         <br>
 

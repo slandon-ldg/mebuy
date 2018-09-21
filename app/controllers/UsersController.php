@@ -66,27 +66,13 @@ class UsersController
                 'error' => 'Incorrect Username or Password. Please try again'
             ]);
         }
-
-        $checkUserDetails        = App::get('database')->getUserActiveShippingDetails();
-        $checkUserBillingDetails = App::get('database')->getUserActiveBillingDetails();
-
+        $activeUserShippingAddress = App::get('database')->getUserActiveShippingDetails();
         return view('users_view/user_dashboard', [
-            'first_name'          => $checkUserDetails['fname'],
-            'last_name'           => $checkUserDetails['lname'],
-            'email'               => $checkUserDetails['email'],
-            'street_address'      => $checkUserDetails['street_address'],
-            'city'                => $checkUserDetails['city'],
-            'postcode'            => $checkUserDetails['postcode'],
-            'country'             => $checkUserDetails['country'],
-            'phone_number'        => $checkUserDetails['phone_number'],
-            'bill_first_name'     => $checkUserBillingDetails['bill_fname'],
-            'bill_last_name'      => $checkUserBillingDetails['bill_lname'],
-            'bill_email'          => $checkUserBillingDetails['bill_email'],
-            'bill_street_address' => $checkUserBillingDetails['bill_street_address'],
-            'bill_city'           => $checkUserBillingDetails['bill_city'],
-            'bill_postcode'       => $checkUserBillingDetails['bill_postcode'],
-            'bill_country'        => $checkUserBillingDetails['bill_country'],
-            'bill_phone_number'   => $checkUserBillingDetails['bill_phone_number']
+            'street_address' => $activeUserShippingAddress['street_address'],
+            'city'           => $activeUserShippingAddress['city'],
+            'postcode'       => $activeUserShippingAddress['postcode'],
+            'country'        => $activeUserShippingAddress['country'],
+            'phone_number'   => $activeUserShippingAddress['phone_number']
         ]);
     }
 
@@ -101,26 +87,13 @@ class UsersController
     // Get Functionality //
     public function user_account_page()
     {
-        $checkUserDetails        = App::get('database')->getUserActiveShippingDetails();
-        $checkUserBillingDetails = App::get('database')->getUserActiveBillingDetails();
-
+        $activeUserShippingAddress = App::get('database')->getUserActiveShippingDetails();
         return view('users_view/user_dashboard', [
-            'first_name'          => $checkUserDetails['fname'],
-            'last_name'           => $checkUserDetails['lname'],
-            'email'               => $checkUserDetails['email'],
-            'street_address'      => $checkUserDetails['street_address'],
-            'city'                => $checkUserDetails['city'],
-            'postcode'            => $checkUserDetails['postcode'],
-            'country'             => $checkUserDetails['country'],
-            'phone_number'        => $checkUserDetails['phone_number'],
-            'bill_first_name'     => $checkUserBillingDetails['bill_fname'],
-            'bill_last_name'      => $checkUserBillingDetails['bill_lname'],
-            'bill_email'          => $checkUserBillingDetails['bill_email'],
-            'bill_street_address' => $checkUserBillingDetails['bill_street_address'],
-            'bill_city'           => $checkUserBillingDetails['bill_city'],
-            'bill_postcode'       => $checkUserBillingDetails['bill_postcode'],
-            'bill_country'        => $checkUserBillingDetails['bill_country'],
-            'bill_phone_number'   => $checkUserBillingDetails['bill_phone_number']
+            'street_address' => $activeUserShippingAddress['street_address'],
+            'city'           => $activeUserShippingAddress['city'],
+            'postcode'       => $activeUserShippingAddress['postcode'],
+            'country'        => $activeUserShippingAddress['country'],
+            'phone_number'   => $activeUserShippingAddress['phone_number']
         ]);
     }
 
@@ -138,38 +111,24 @@ class UsersController
                 'error' => 'Error please try again'
             ]);
         }
-
-        $checkUserDetails        = App::get('database')->getUserActiveShippingDetails();
-        $checkUserBillingDetails = App::get('database')->getUserActiveBillingDetails();
-
+        $activeUserShippingAddress = App::get('database')->getUserActiveShippingDetails();
         return view('users_view/user_dashboard', [
-            'first_name'          => $checkUserDetails['fname'],
-            'last_name'           => $checkUserDetails['lname'],
-            'email'               => $checkUserDetails['email'],
-            'street_address'      => $checkUserDetails['street_address'],
-            'city'                => $checkUserDetails['city'],
-            'postcode'            => $checkUserDetails['postcode'],
-            'country'             => $checkUserDetails['country'],
-            'phone_number'        => $checkUserDetails['phone_number'],
-            'bill_first_name'     => $checkUserBillingDetails['bill_fname'],
-            'bill_last_name'      => $checkUserBillingDetails['bill_lname'],
-            'bill_email'          => $checkUserBillingDetails['bill_email'],
-            'bill_street_address' => $checkUserBillingDetails['bill_street_address'],
-            'bill_city'           => $checkUserBillingDetails['bill_city'],
-            'bill_postcode'       => $checkUserBillingDetails['bill_postcode'],
-            'bill_country'        => $checkUserBillingDetails['bill_country'],
-            'bill_phone_number'   => $checkUserBillingDetails['bill_phone_number']
+            'street_address' => $activeUserShippingAddress['street_address'],
+            'city'           => $activeUserShippingAddress['city'],
+            'postcode'       => $activeUserShippingAddress['postcode'],
+            'country'        => $activeUserShippingAddress['country'],
+            'phone_number'   => $activeUserShippingAddress['phone_number']
         ]);
     }
 
     // Post Functionality //
     public function user_update_address_info()
     {
-        $street      = $_POST['address_street'];
-        $city        = $_POST['address_city'];
-        $postcode    = $_POST['address_postcode'];
-        $country     = $_POST['address_country'];
-        $phonenumber = $_POST['address_phonenumber'];
+        $street       = $_POST['address_street'];
+        $city         = $_POST['address_city'];
+        $postcode     = $_POST['address_postcode'];
+        $country      = $_POST['address_country'];
+        $phone_number = $_POST['address_phonenumber'];
 
         if (isset($_POST['active_shipping_address'])) {
             $active_shipping_address = 1;
@@ -177,34 +136,42 @@ class UsersController
             $active_shipping_address = 0;
         }
 
-        $address = App::get('database')->updateUserAddressDetails($street, $city, $postcode, $country, $phonenumber, $active_shipping_address);
+        $update_address = App::get('database')->updateUserAddressDetails($street, $city, $postcode, $country, $phone_number, $active_shipping_address);
 
-        if (!$address) {
-            return view("index", [
-                'error' => 'Error please try again'
+        if (!$update_address) {
+            return view('users_view/user_dashboard', [
+                'error' => 'Error updating address, please try again'
             ]);
         }
 
-        $checkUserDetails        = App::get('database')->getUserActiveShippingDetails();
-        $checkUserBillingDetails = App::get('database')->getUserActiveBillingDetails();
+        $activeUserShippingAddress = App::get('database')->getUserActiveShippingDetails();
 
         return view('users_view/user_dashboard', [
-            'first_name'          => $checkUserDetails['fname'],
-            'last_name'           => $checkUserDetails['lname'],
-            'email'               => $checkUserDetails['email'],
-            'street_address'      => $checkUserDetails['street_address'],
-            'city'                => $checkUserDetails['city'],
-            'postcode'            => $checkUserDetails['postcode'],
-            'country'             => $checkUserDetails['country'],
-            'phone_number'        => $checkUserDetails['phone_number'],
-            'bill_first_name'     => $checkUserBillingDetails['bill_fname'],
-            'bill_last_name'      => $checkUserBillingDetails['bill_lname'],
-            'bill_email'          => $checkUserBillingDetails['bill_email'],
-            'bill_street_address' => $checkUserBillingDetails['bill_street_address'],
-            'bill_city'           => $checkUserBillingDetails['bill_city'],
-            'bill_postcode'       => $checkUserBillingDetails['bill_postcode'],
-            'bill_country'        => $checkUserBillingDetails['bill_country'],
-            'bill_phone_number'   => $checkUserBillingDetails['bill_phone_number']
+            'success'        => 'Address Updated',
+            'street_address' => $activeUserShippingAddress['street_address'],
+            'city'           => $activeUserShippingAddress['city'],
+            'postcode'       => $activeUserShippingAddress['postcode'],
+            'country'        => $activeUserShippingAddress['country'],
+            'phone_number'   => $activeUserShippingAddress['phone_number']
+        ]);
+    }
+
+    public function user_update_bill_address_info()
+    {
+        $activeUserShippingAddress = App::get('database')->getUserActiveShippingDetails();
+
+        return view('users_view/user_dashboard', [
+            'success'           => 'Billing Address Updated',
+            'street_address'    => $activeUserShippingAddress['street_address'],
+            'city'              => $activeUserShippingAddress['city'],
+            'postcode'          => $activeUserShippingAddress['postcode'],
+            'country'           => $activeUserShippingAddress['country'],
+            'phone_number'      => $activeUserShippingAddress['phone_number'],
+            'bill_street'       => $_POST['bill_address_street'],
+            'bill_city'         => $_POST['bill_address_city'],
+            'bill_postcode'     => $_POST['bill_address_postcode'],
+            'bill_country'      => $_POST['bill_address_country'],
+            'bill_phone_number' => $_POST['bill_address_phonenumber']
         ]);
     }
 

@@ -22,3 +22,4 @@ $router->get('user_account', 'UsersController@user_account_page');
 
 $router->post('update_personal_info', 'UsersController@user_update_personal_info');
 $router->post('update_address_info', 'UsersController@user_update_address_info');
+$router->post('update_bill_address_info', 'UsersController@user_update_bill_address_info');

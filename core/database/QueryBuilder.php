@@ -40,6 +40,7 @@ class QueryBuilder
     public function insert($table, $parameters)
     {
         $sql = sprintf(
+        /** @lang text */
             'insert into %s (%s) values (%s)',
             $table,
             implode(', ', array_keys($parameters)),
@@ -141,45 +142,32 @@ class QueryBuilder
             && !empty($postcode)
             && !empty($country)
             && !empty($phonenumber)
-            && !empty($active_shipping_address)
         ) {
-            $getActiveAddress = $this->pdo->prepare("select * from customer_address where customer_address.user_id = '" . $_SESSION['user_id'] . "' and customer_address.active_address = 1");
+            if ($active_shipping_address === 1) {
+                // First check if there is an active address, if so then change it to inactive
+                $checkActiveAddress = $this->pdo->prepare("
+                update customer_address set customer_address.user_id = '" . $_SESSION['user_id'] . "', customer_address.active_address = '0'
+                ");
+                $checkActiveAddress->execute();
 
-            $getActiveAddress->execute();
-            $count = $getActiveAddress->rowCount();
-
-            if ($count === 1) {
-                $updateActiveAddress = $this->pdo->prepare("update customer_address set customer_address.active_address = 0 where customer_address.user_id = '" . $_SESSION['user_id'] . "'");
-
-                $updateActiveAddress->execute();
-
-                $update_billing_address_statement = $this->pdo->prepare("update customer_billing_address set customer_billing_address.active_address = 0 where customer_billing_address.user_id = '" . $_SESSION['user_id'] . "'");
-
-                $update_billing_address_statement->execute();
+                // Then add the new address regardless
+                $addActiveAddress = $this->pdo->prepare("
+                    insert into customer_address (user_id, street_address, city, postcode, country, phone_number, active_address) values ('" . $_SESSION['user_id'] . "', '" . $street . "', '" . $city . "', '" . $postcode . "', '" . $country . "', '" . $phonenumber . "', '1')
+                ");
+                $addActiveAddress->execute();
+            } else {
+                $addAddress = $this->pdo->prepare("
+                    insert into customer_address (user_id, street_address, city, postcode, country, phone_number, active_address) values ('" . $_SESSION['user_id'] . "', '" . $street . "', '" . $city . "', '" . $postcode . "', '" . $country . "', '" . $phonenumber . "', '0')
+                ");
+                $addAddress->execute();
             }
-
-            $statement = $this->pdo->prepare("insert into customer_address (user_id, street_address, city, postcode, country, phone_number, active_address) VALUES ('" . $_SESSION['user_id'] . "', '" . $street . "', '" . $city . "', '" . $postcode . "', '" . $country . "', '" . $phonenumber . "', '1')");
-
-            $billing_address_statement = $this->pdo->prepare("insert into customer_billing_address (user_id, street_address, city, postcode, country, phone_number, active_address) VALUES ('" . $_SESSION['user_id'] . "', '" . $street . "', '" . $city . "', '" . $postcode . "', '" . $country . "', '" . $phonenumber . "', '1')");
-
-            $statement->execute();
-            $billing_address_statement->execute();
-
             return true;
         }
-        if (!empty($street)
-            && !empty($city)
-            && !empty($postcode)
-            && !empty($country)
-            && !empty($phonenumber)
-            && empty($active_shipping_address)
-        ) {
-            $statement = $this->pdo->prepare("insert into customer_address (user_id, street_address, city, postcode, country, phone_number, active_address) VALUES ('" . $_SESSION['user_id'] . "', '" . $street . "', '" . $city . "', '" . $postcode . "', '" . $country . "', '" . $phonenumber . "', '0')");
+        return false;
+    }
 
-            $statement->execute();
-
-            return true;
-        }
+    public function updateUserBillingDetails($street, $city, $postcode, $country, $phonenumber, $active_billing_address)
+    {
         return false;
     }
 
@@ -190,74 +178,20 @@ class QueryBuilder
     {
         if (!session_id()) session_start();
         if (!empty($_SESSION['user_id'])) {
-            $addressStatement = $this->pdo->prepare(
-                "select * from customer_address 
-                           where customer_address.user_id = '" . $_SESSION['user_id'] . "'
-                           and customer_address.active_address = '1'                          
+            $activeAddressStatement = $this->pdo->prepare("
+                select * from customer_address where customer_address.user_id = '" . $_SESSION['user_id'] . "' and customer_address.active_address = '1'
             ");
-            $addressStatement->execute();
+            $activeAddressStatement->execute();
+            $activeAddressRow      = $activeAddressStatement->fetch(PDO::FETCH_ASSOC);
+            $activeAddressRowCount = $activeAddressStatement->rowCount();
 
-            $userStatement = $this->pdo->prepare(
-                "select * from users 
-                           where users.user_id = '" . $_SESSION['user_id'] . "'                          
-            ");
-            $userStatement->execute();
-
-            $addressRow      = $addressStatement->fetch(PDO::FETCH_ASSOC);
-            $addressRowCount = $addressStatement->rowCount();
-
-            $userRow      = $userStatement->fetch(PDO::FETCH_ASSOC);
-            $userRowCount = $userStatement->rowCount();
-
-            if ($addressRowCount === 1 || $userRowCount === 1) {
+            if ($activeAddressRowCount === 1) {
                 return [
-                    'fname'          => $userRow['first_name'],
-                    'lname'          => $userRow['last_name'],
-                    'email'          => $userRow['email_address'],
-                    'street_address' => $addressRow['street_address'],
-                    'city'           => $addressRow['city'],
-                    'postcode'       => $addressRow['postcode'],
-                    'country'        => $addressRow['country'],
-                    'phone_number'   => $addressRow['phone_number']
-                ];
-            }
-        }
-        return false;
-    }
-
-    public function getUserActiveBillingDetails()
-    {
-        if (!session_id()) session_start();
-        if (!empty($_SESSION['user_id'])) {
-            $billAddressStatement = $this->pdo->prepare(
-                "select * from customer_billing_address 
-                           where customer_billing_address.user_id = '" . $_SESSION['user_id'] . "'
-                           and customer_billing_address.active_address = '1'                          
-            ");
-            $billAddressStatement->execute();
-
-            $userStatement = $this->pdo->prepare(
-                "select * from users 
-                           where users.user_id = '" . $_SESSION['user_id'] . "'                          
-            ");
-            $userStatement->execute();
-
-            $billAddressRow      = $billAddressStatement->fetch(PDO::FETCH_ASSOC);
-            $billAddressRowCount = $billAddressStatement->rowCount();
-
-            $userRow      = $userStatement->fetch(PDO::FETCH_ASSOC);
-            $userRowCount = $userStatement->rowCount();
-
-            if ($billAddressRowCount === 1 || $userRowCount === 1) {
-                return [
-                    'bill_fname'          => $userRow['first_name'],
-                    'bill_lname'          => $userRow['last_name'],
-                    'bill_email'          => $userRow['email_address'],
-                    'bill_street_address' => $billAddressRow['street_address'],
-                    'bill_city'           => $billAddressRow['city'],
-                    'bill_postcode'       => $billAddressRow['postcode'],
-                    'bill_country'        => $billAddressRow['country'],
-                    'bill_phone_number'   => $billAddressRow['phone_number']
+                    'street_address' => $activeAddressRow['street_address'],
+                    'city'           => $activeAddressRow['city'],
+                    'postcode'       => $activeAddressRow['postcode'],
+                    'country'        => $activeAddressRow['country'],
+                    'phone_number'   => $activeAddressRow['phone_number'],
                 ];
             }
         }

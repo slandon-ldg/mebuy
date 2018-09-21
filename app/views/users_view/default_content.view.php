@@ -21,17 +21,12 @@ echo "<h1>Welcome " . $_SESSION['first_name'] . " " . $_SESSION['last_name'] . "
         <h3 class="address_card_header">Shipping Address</h3>
         <div class="address_card_content">
             <?php
-            if (isset($first_name)
-                && isset($last_name)
-                && isset($email)
-                && isset($street_address)
+            if (isset($street_address)
                 && isset($city)
                 && isset($postcode)
                 && isset($country)
                 && isset($phone_number)
             ) {
-                echo "<p>" . $first_name . " " . $last_name . "</p>";
-                echo "<p>" . $email . "</p>";
                 echo "<p>" . $street_address . "</p>";
                 echo "<p>" . $city . "</p>";
                 echo "<p>" . $postcode . "</p>";
@@ -41,7 +36,7 @@ echo "<h1>Welcome " . $_SESSION['first_name'] . " " . $_SESSION['last_name'] . "
                 echo "<div class='li_content'>";
                 echo "<li>";
                 echo "<i class='small_nav fas fa-user-circle'></i>";
-                echo "Please fill out the <a href='user_account?nav=address_details'><i class='fas fa-user-circle'></i> Address Info</a> Section";
+                echo "Please fill out the <a href='user_account?nav=address_details'><i class='fas fa-home'></i> Address Info</a> Section";
                 echo "</li>";
                 echo "</div>";
             }
@@ -53,18 +48,13 @@ echo "<h1>Welcome " . $_SESSION['first_name'] . " " . $_SESSION['last_name'] . "
         <h3 class="address_card_header">Billing Address</h3>
         <div class="address_card_content">
             <?php
-            if (isset($bill_first_name)
-                && isset($bill_last_name)
-                && isset($bill_email)
-                && isset($bill_street_address)
+            if (isset($bill_street)
                 && isset($bill_city)
                 && isset($bill_postcode)
                 && isset($bill_country)
                 && isset($bill_phone_number)
             ) {
-                echo "<p>" . $bill_first_name . " " . $bill_last_name . "</p>";
-                echo "<p>" . $bill_email . "</p>";
-                echo "<p>" . $bill_street_address . "</p>";
+                echo "<p>" . $bill_street . "</p>";
                 echo "<p>" . $bill_city . "</p>";
                 echo "<p>" . $bill_postcode . "</p>";
                 echo "<p>" . $bill_country . "</p>";
@@ -73,14 +63,13 @@ echo "<h1>Welcome " . $_SESSION['first_name'] . " " . $_SESSION['last_name'] . "
                 echo "<div class='li_content'>";
                 echo "<li>";
                 echo "<i class='small_nav fas fa-user-circle'></i>";
-                echo "Please fill out the <a href='user_account?nav=billing_details'><i class='fas fa-user-circle'></i> Billing Info</a> Section";
+                echo "Please fill out the <a href='user_account?nav=billing_details'><i class='far fa-credit-card'></i> Address Info</a> Section";
                 echo "</li>";
                 echo "</div>";
             }
             ?>
         </div>
     </div>
-
 
 </div>
 <br>

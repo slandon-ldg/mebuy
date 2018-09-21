@@ -32,7 +32,7 @@
 
         <br>
 
-        <input type="checkbox" id="active_shipping_address" name="active_shipping_address"> Set as Default Billing
+        <input type="checkbox" id="active_shipping_address" name="active_shipping_address"> Set as Default Shipping
         Address<br>
 
         <button class="user_dashboard_submit_button" style="vertical-align:middle"><span>Submit</span></button>

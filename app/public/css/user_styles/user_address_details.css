@@ -9,11 +9,11 @@
     width            : 40%;
     background-color : #FFFFFF;
     text-align       : center;
-    display          : inline-block;
+    display          : inline-grid;
 }
 .address_container li {
-    padding : 10px;
-    list-style-type: none;
+    padding         : 10px;
+    list-style-type : none;
 }
 .address_container p {
     padding : 1px;
