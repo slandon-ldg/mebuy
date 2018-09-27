@@ -1,0 +1,53 @@
+/* Container for flexboxes */
+section {
+    display : -webkit-flex;
+    display : flex;
+}
+.small_nav {
+    display : none;
+}
+/* Style the navigation menu */
+.userdashboard_nav {
+    -webkit-flex  : 1;
+    -ms-flex      : 1;
+    flex          : 1;
+    background    : #F1F1F1;
+    padding       : 10px;
+    border        : 1px solid transparent;
+    border-radius : 4px;
+    margin-left   : 10px;
+    text-align    : center;
+}
+/* Style the list inside the menu */
+.userdashboard_nav ul {
+    list-style-type : none;
+    padding         : 0;
+}
+.userdashboard_nav a:hover {
+    color : #000000;
+}
+@media screen and (min-width : 700px) {
+    .userdashboard_nav li {
+        font-size : 18px;
+    }
+}
+@media screen and (max-width : 420px) {
+    .userdashboard_nav a {
+        display : none;
+        margin  : auto;
+    }
+    .small_nav {
+        display    : block;
+        text-align : center;
+        font-size  : 25px;
+        padding    : 5px;
+    }
+}
+/* Style the content */
+article {
+    -webkit-flex     : 3;
+    -ms-flex         : 3;
+    flex             : 3;
+    background-color : #FFFFFF;
+    padding          : 10px;
+}

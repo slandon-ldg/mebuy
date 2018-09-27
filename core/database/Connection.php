@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: slandon
- * Date: 16/08/2018
- * Time: 22:34
- */
 
 class Connection
 {

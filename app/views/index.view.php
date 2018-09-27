@@ -1,10 +1,3 @@
-<!-- /**
- * Created by PhpStorm.
- * User: slandon
- * Date: 19/08/2018
- * Time: 20:30
- */ -->
-
 <?php include('partials/header.view.php'); ?>
 
 <div class="page_content">

@@ -1,0 +1,54 @@
+
+.user_dashboard_inputfields, .user_dashboard_inputfields_email, .user_dashboard_inputfields_street {
+    width         : 40%;
+    padding       : 10px;
+    margin        : 8px 0;
+    display       : inline-block;
+    border        : 2px solid #F1F1F1;
+    border-radius : 4px;
+    box-sizing    : border-box;
+    text-align    : center;
+    font-size     : 15px;
+}
+.user_dashboard_inputfields_street {
+    width : 80%;
+}
+.user_dashboard_submit_button {
+    width : 60%;
+}
+/* Submit Button Styling */
+.user_dashboard_submit_button {
+    display          : inline-block;
+    border-radius    : 4px;
+    background-color : #4CAF50; /* Green */
+    border           : none;
+    color            : #FFFFFF;
+    text-align       : center;
+    font-size        : 15px;
+    width            : 20%;
+    padding          : 10px;
+    margin           : 8px;
+    transition       : all 0.5s;
+    cursor           : pointer;
+}
+.user_dashboard_submit_button span {
+    cursor     : pointer;
+    display    : inline-block;
+    position   : relative;
+    transition : 0.5s;
+}
+.user_dashboard_submit_button span:after {
+    content    : '\00bb';
+    position   : absolute;
+    opacity    : 0;
+    top        : 0;
+    right      : -10px;
+    transition : 0.5s;
+}
+.user_dashboard_submit_button:hover span {
+    padding-right : 15px;
+}
+.user_dashboard_submit_button:hover span:after {
+    opacity : 100;
+    right   : 0;
+}

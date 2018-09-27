@@ -1,10 +1,3 @@
-<!--/**
- * Created by PhpStorm.
- * User: slandon
- * Date: 22/08/2018
- * Time: 16:32
- */-->
-
 <?php require('app/views/partials/header.view.php'); ?>
 <link rel="stylesheet" href="app/public/css/user_styles/user_registration_form.css">
 

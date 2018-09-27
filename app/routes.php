@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: slandon
- * Date: 16/08/2018
- * Time: 22:33
- */
 
 // Main Page //
 $router->get('', 'PagesController@home');
@@ -20,6 +14,13 @@ $router->get('logout', 'UsersController@user_logout');
 
 $router->get('user_account', 'UsersController@user_account_page');
 
+$router->get('user_personal_details', 'UsersController@user_personal_info');
 $router->post('update_personal_info', 'UsersController@user_update_personal_info');
+
+$router->get('user_address_details', 'UsersController@user_address_info');
 $router->post('update_address_info', 'UsersController@user_update_address_info');
+
+$router->get('user_bill_address_details', 'UsersController@user_bill_address_info');
 $router->post('update_bill_address_info', 'UsersController@user_update_bill_address_info');
+
+$router->get('user_order_details', 'OrdersController@user_get_all_orders');

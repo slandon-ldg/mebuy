@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: slandon
- * Date: 22/08/2018
- * Time: 16:51
- */
 
 namespace App\Controllers;
 
@@ -70,7 +64,6 @@ class UsersController
         $activeUserBillingAddress  = App::get('database')->getUserActiveBillingDetails();
 
         return view('users_view/user_dashboard', [
-            'success'           => 'Billing Address Updated',
             'street_address'    => $activeUserShippingAddress['street_address'],
             'city'              => $activeUserShippingAddress['city'],
             'postcode'          => $activeUserShippingAddress['postcode'],
@@ -99,7 +92,6 @@ class UsersController
         $activeUserBillingAddress  = App::get('database')->getUserActiveBillingDetails();
 
         return view('users_view/user_dashboard', [
-            'success'           => 'Billing Address Updated',
             'street_address'    => $activeUserShippingAddress['street_address'],
             'city'              => $activeUserShippingAddress['city'],
             'postcode'          => $activeUserShippingAddress['postcode'],
@@ -113,6 +105,11 @@ class UsersController
         ]);
     }
 
+    // Get Functionality //
+    public function user_personal_info()
+    {
+        return view("users_view/personal_details");
+    }
     // Post Functionality //
     public function user_update_personal_info()
     {
@@ -131,7 +128,7 @@ class UsersController
         $activeUserBillingAddress  = App::get('database')->getUserActiveBillingDetails();
 
         return view('users_view/user_dashboard', [
-            'success'           => 'Billing Address Updated',
+            'success'           => 'Personal Info Updated',
             'street_address'    => $activeUserShippingAddress['street_address'],
             'city'              => $activeUserShippingAddress['city'],
             'postcode'          => $activeUserShippingAddress['postcode'],
@@ -145,6 +142,11 @@ class UsersController
         ]);
     }
 
+    // Get Functionality //
+    public function user_address_info()
+    {
+        return view("users_view/address_details");
+    }
     // Post Functionality //
     public function user_update_address_info()
     {
@@ -176,7 +178,7 @@ class UsersController
         $activeUserBillingAddress  = App::get('database')->getUserActiveBillingDetails();
 
         return view('users_view/user_dashboard', [
-            'success'           => 'Billing Address Updated',
+            'success'           => 'Shipping Address Updated',
             'street_address'    => $activeUserShippingAddress['street_address'],
             'city'              => $activeUserShippingAddress['city'],
             'postcode'          => $activeUserShippingAddress['postcode'],
@@ -190,6 +192,12 @@ class UsersController
         ]);
     }
 
+    //Get Functionality //
+    public function user_bill_address_info()
+    {
+        return view("users_view/billing_details");
+    }
+    // Post Functionality //
     public function user_update_bill_address_info()
     {
         $bill_street       = $_POST['bill_address_street'];

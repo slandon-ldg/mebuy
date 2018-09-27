@@ -1,9 +1,3 @@
-<!--/**
- * Created by PhpStorm.
- * User: slandon
- * Date: 22/08/2018
- * Time: 17:00
- */-->
 <link rel="stylesheet" href="app/public/css/user_styles/login_modal_popup.css">
 
 <div id="login_modal" class="modal">

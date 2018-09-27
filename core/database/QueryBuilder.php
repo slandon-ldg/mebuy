@@ -1,11 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: slandon
- * Date: 27/08/2018
- * Time: 15:17
- */
 
+/**
+ * Class QueryBuilder
+ */
 class QueryBuilder
 {
     /**
@@ -180,6 +177,14 @@ class QueryBuilder
         return false;
     }
 
+    /**
+     * @param $street
+     * @param $city
+     * @param $postcode
+     * @param $country
+     * @param $phonenumber
+     * @return bool
+     */
     public function updateUserBillingDetails($street, $city, $postcode, $country, $phonenumber)
     {
         if (!session_id()) session_start();
@@ -230,6 +235,9 @@ class QueryBuilder
         return false;
     }
 
+    /**
+     * @return array|bool
+     */
     public function getUserActiveBillingDetails()
     {
         if (!session_id()) session_start();

@@ -1,12 +1,13 @@
 .mebuy-footer {
-    text-align : center;
-    font-size  : 18px;
+    text-align     : center;
+    font-size      : 18px;
+    padding-bottom : 10px;
 }
 .mebuy-footer p {
-    margin-top: 10px;
+    margin-top : 10px;
 }
 .mebuy-footer a:hover {
-    color: #000000;
+    color : #000000;
 }
 hr {
     margin : 20px;

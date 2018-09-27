@@ -1,128 +1,31 @@
-.dynamic-content {
-    display : none;
-}
-/* Container for flexboxes */
-section {
-    display : -webkit-flex;
-    display : flex;
-}
-.small_nav {
-    display : none;
-}
-/* Style the navigation menu */
-.userdashboard_nav {
-    -webkit-flex  : 1;
-    -ms-flex      : 1;
-    flex          : 1;
-    background    : #F1F1F1;
-    padding       : 10px;
-    border        : 1px solid transparent;
-    border-radius : 4px;
-    margin-left   : 10px;
-    text-align    : center;
-}
-/* Style the list inside the menu */
-.userdashboard_nav ul {
-    list-style-type : none;
-    padding         : 0;
-}
-.userdashboard_nav a:hover {
-    color : #000000;
-}
-@media screen and (min-width : 700px) {
-    .userdashboard_nav li {
-        font-size : 18px;
-    }
-}
-@media screen and (max-width : 420px) {
-    .userdashboard_nav a {
-        display : none;
-        margin  : auto;
-    }
-    .small_nav {
-        display    : block;
-        text-align : center;
-        font-size  : 25px;
-        padding    : 5px;
-    }
-}
-/* Style the content */
-article {
-    -webkit-flex     : 3;
-    -ms-flex         : 3;
-    flex             : 3;
-    background-color : #FFFFFF;
-    padding          : 10px;
-}
 /* Style the dynamic content for each page */
 /* Default Content Styling */
 .personal_info_div {
     text-align : center;
 }
 h1 {
-    font-size   : 25px;
+    font-size : 25px;
 }
 h1, h2, h3, h4 {
     margin-left : 20px;
 }
-.user_labels {
-    padding          : 10px;
-    background-color : #F1F1F1;
-    display          : inline-block;
-    border           : 1px solid transparent;
-    border-radius    : 4px;
-    font-size        : 20px;
-}
-.user_dashboard_inputfields, .user_dashboard_inputfields_email, .user_dashboard_inputfields_street {
-    width         : 40%;
-    padding       : 10px;
-    margin        : 8px 0;
-    display       : inline-block;
-    border        : 2px solid #F1F1F1;
-    border-radius : 4px;
-    box-sizing    : border-box;
-    text-align    : center;
-    font-size     : 15px;
-}
-.user_dashboard_inputfields_street {
-    width : 80%;
-}
-.user_dashboard_submit_button {
-    width : 60%;
-}
-/* Submit Button Styling */
-.user_dashboard_submit_button {
-    display          : inline-block;
-    border-radius    : 4px;
-    background-color : #4CAF50; /* Green */
-    border           : none;
-    color            : #FFFFFF;
+.address_container {
+    margin-top       : 20px;
+    margin-left      : 10px;
+    padding-bottom   : 5px;
+    box-shadow       : 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    width            : 40%;
+    background-color : #FFFFFF;
     text-align       : center;
-    font-size        : 15px;
-    width            : 20%;
-    padding          : 10px;
-    margin           : 8px;
-    transition       : all 0.5s;
-    cursor           : pointer;
+    display          : inline-grid;
 }
-.user_dashboard_submit_button span {
-    cursor     : pointer;
-    display    : inline-block;
-    position   : relative;
-    transition : 0.5s;
+.address_container li {
+    padding         : 10px;
+    list-style-type : none;
 }
-.user_dashboard_submit_button span:after {
-    content    : '\00bb';
-    position   : absolute;
-    opacity    : 0;
-    top        : 0;
-    right      : -10px;
-    transition : 0.5s;
+.address_container p {
+    padding : 1px;
 }
-.user_dashboard_submit_button:hover span {
-    padding-right : 15px;
-}
-.user_dashboard_submit_button:hover span:after {
-    opacity : 100;
-    right   : 0;
+.address_card_header {
+    margin : 5px 0 10px 0;
 }
