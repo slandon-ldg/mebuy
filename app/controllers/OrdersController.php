@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Core\App;
+
 class OrdersController
 {
     // create an order
@@ -10,7 +12,11 @@ class OrdersController
     // view an order
     public function user_get_all_orders()
     {
-        return view('users_view/order_details');
+        $users = App::get('database')->selectAllFrom('users');
+
+        return view('users_view/order_details', [
+            'users' => $users
+        ]);
     }
 
     // delete an order

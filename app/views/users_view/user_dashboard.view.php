@@ -1,6 +1,5 @@
 <?php require('app/views/partials/header.view.php'); ?>
     <link rel="stylesheet" href="app/public/css/user_styles/user_dashboard_style.css">
-    <link rel="stylesheet" href="app/public/css/user_styles/user_address_details.css">
 
     <section>
         <?php require('app/views/partials/dashboard_sidenav.view.php'); ?>

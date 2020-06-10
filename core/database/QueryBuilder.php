@@ -51,6 +51,7 @@ class QueryBuilder
         }
     }
 
+    // User Queries //
     /**
      * @param $user_email
      * @return bool
@@ -261,5 +262,7 @@ class QueryBuilder
         }
         return false;
     }
+
+    // Order Queries //
 
 }
